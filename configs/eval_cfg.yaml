@@ -1,0 +1,28 @@
+meta_args:
+  seed: 12345
+  nccl_timeout: 1200
+  cache_dir: null
+  tapvid_evaluator: 
+    debug: false
+    sync_results_every: 15
+model_args:
+  build:
+    force: false
+    highres: true
+  base_cwm: {}
+  flow_predictor: 
+    masking_iters: 10
+    masking_ratio: 0.9 
+    zoom_iters: 4
+  soft_argmax: {}
+  gauss_perturber: {}
+  occ_predictor: {}
+data_args:
+    num_workers: 4
+    batch_size: 32
+    tapvid: 
+        dataset: davis
+        resolution: native
+        frame_delta: -1
+        path_to_pkl: datasets/tapvid/tapvid_davis.pkl
+        debug: false

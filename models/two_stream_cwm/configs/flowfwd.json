@@ -1,0 +1,63 @@
+{
+    "encoder_params": {
+        "primary": {
+            "embed_dim": 768,
+            "inp": {
+                "inp_size": [1, 224, 224]
+            },
+            "patch_size": [1, 8, 8]
+        },
+        "secondary": {
+            "embed_dim": 768,
+            "inp": {
+                "inp_size": [1, 224, 224],
+                "in_chans": 5
+            },
+            "patch_size": [1, 8, 8]
+        },
+        "transformer_params": {
+            "block_params": {
+                "primary": {
+                    "dim": 768,
+                    "attn": {
+                        "num_heads": 12,
+                        "qkv_bias": true
+                    }
+                },
+                "secondary": {
+                    "dim": 768,
+                    "attn": {
+                        "num_heads": 12,
+                        "qkv_bias": true
+                    }
+                }
+            },
+            "depth": 12,
+            "conn_patterns": ["o<->o", "o-_", "o-_", "o-_", "o<->o", "o-_", "o-_", "o-_", "o<->o", "o-_", "o-_", "o-_"],
+            "primary_output": {"should_output": false},
+            "secondary_output": {"should_output": false}
+        }
+    },
+    "decoder_params": {
+        "block_params": {
+            "primary": {
+                "dim": 384,
+                "attn": {
+                    "num_heads": 6,
+                    "qkv_bias": true
+                }
+            },
+            "secondary": {
+                "dim": 384,
+                "attn": {
+                    "num_heads": 6,
+                    "qkv_bias": true
+                }
+            }
+        },
+        "depth": 4,
+        "conn_patterns": ["o<->o", "o<-_", "o-_", "o-_"],
+        "primary_output": {"should_output": true, "num_classes": 192},
+        "secondary_output": {"should_output": false}
+    }
+}

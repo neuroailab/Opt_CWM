@@ -1,0 +1,31 @@
+meta_args:
+  seed: 12345
+  nccl_timeout: 1200
+  cache_dir: null
+model_args:
+  build: 
+    force: false
+    two_stream_cwm_config_path: models/two_stream_cwm/configs/flowfwd.json
+data_args:
+    num_workers: 4
+    batch_size: 4
+    samples_per_epoch: 10000
+    kinetics:
+      crop_size: 224 
+      augmentation_type: center
+      augmentation_scales: [] 
+      path_to_txt: datasets/kinetics/kinetics400_training_list.txt
+      tubelet_size: 1
+      frame_delta_ms: 500
+optim_args:
+  betas: [0.9, 0.95]
+  epochs: 400
+  lr: 0.00015
+  min_lr: 0
+  opt: adamw
+  opt_eps: 1.0e-08
+  scheduler: cosine
+  warmup_epochs: 40
+  warmup_steps: -1
+  weight_decay: 0.05
+  weight_decay_end: 0.05

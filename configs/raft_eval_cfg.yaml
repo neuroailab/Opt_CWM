@@ -1,0 +1,21 @@
+meta_args:
+  seed: 12345
+  nccl_timeout: 1200
+  cache_dir: null
+  tapvid_evaluator: 
+    debug: false
+    sync_results_every: 15
+model_args:
+  build:
+    raft_config_path: external/sea_raft/config/distilled_cfg.json
+    force: false
+    raft_ckpt_path: null 
+data_args:
+    num_workers: 4
+    batch_size: 16
+    tapvid: 
+        dataset: davis
+        resolution: nearest_16
+        frame_delta: -1
+        path_to_pkl: datasets/tapvid/tapvid_davis.pkl
+        debug: false
