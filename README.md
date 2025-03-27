@@ -9,7 +9,7 @@
 
 (* equal contribution)
 
-<a href="https://en.wikipedia.org/wiki/HTTP_404"><img src='https://img.shields.io/badge/arXiv-CWM-red' alt='Paper PDF'></a>
+<a href="https://arxiv.org/abs/2503.19953"><img src='https://img.shields.io/badge/arXiv-CWM-red' alt='Paper PDF'></a>
 <a href='https://neuroailab.github.io/opt_cwm_page/'><img src='https://img.shields.io/badge/Project_Page-CWM-green' alt='Project Page'></a>
 <a href='https://colab.research.google.com/drive/1ghkpW78ZQmdHURB-pDtGudrLOnzcBxTD?usp=sharing'><img src='https://colab.research.google.com/assets/colab-badge.svg'></a>
 </div>
@@ -40,7 +40,7 @@ model_args:
 will pass the configured `zoom_iters` and `masking_iters` to the `FlowPredictor` class. Equivalently, configurations can be set through CLI, e.g.
 ```bash
 python demo.py \
- --yaml=configs/eval_configs.yaml \
+ --yaml=configs/eval_cfg.yaml \
  --model_args.flow_predictor.zoom_iters=4
 ```
 
@@ -143,5 +143,13 @@ NPROC=1 ./scripts/run_raft.sh [DATASET] [EVALUATION]
 If you find this project useful, please consider citing:
 
 ```bibtex
-@article{TBD}
+@misc{stojanov2025motionconcepts,
+      title={Self-Supervised Learning of Motion Concepts by Optimizing Counterfactuals}, 
+      author={Stefan Stojanov and David Wendt and Seungwoo Kim and Rahul Venkatesh and Kevin Feigelis and Jiajun Wu and Daniel LK Yamins},
+      year={2025},
+      eprint={2503.19953},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2503.19953}, 
+}
 ```
