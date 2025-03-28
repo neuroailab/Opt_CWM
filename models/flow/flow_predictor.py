@@ -5,6 +5,8 @@ import torch
 import tqdm
 from torch import nn
 
+from huggingface_hub import hf_hub_download
+
 from models.base_cwm import masking_generator, modeling_pretrain
 from models.flow import occ_predictor, perturber, soft_argmax
 from utils import constants, dist_logging, utils
@@ -327,4 +329,28 @@ class FlowPredictor(nn.Module):
 
         logger.info("Succesfully loaded checkpoint for flow_predictor.")
 
+        return self
+    
+    def from_pretrained(self, repo_id: str):
+        """
+        Loads pretrained weights from the specified Hugging Face repository.
+
+        Args:
+            repo_id (str): The Hugging Face repository ID containing the pretrained weights
+
+        Returns:
+            FlowPredictor: The current instance with loaded pretrained weights
+        """
+        # Load the pretrained cwm model
+        self.cwm_model.from_pretrained(repo_id, filename="cwm_model.pt")
+
+        # Load the pretrained weights
+        filepath = hf_hub_download(repo_id=repo_id, filename="flow_predictor.pt")
+        ckpt = torch.load(filepath, map_location="cpu")
+        if "model" in ckpt:
+            ckpt = ckpt["model"]
+        ckpt = {k.replace("flow_predictor.", ""): v for k, v in ckpt.items() if "flow_predictor" in k}
+        self.load_state_dict(ckpt, strict=False)
+        
+        logger.info(f"Successfully loaded pretrained weights from {repo_id}")
         return self

@@ -1,6 +1,8 @@
 import os
 from functools import partial
 
+from huggingface_hub import PyTorchModelHubMixin
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -33,7 +35,11 @@ def interpolate_pos_encoding(pos_embed, n_frames, h, w):
     return patch_pos_embed.permute(0, 2, 3, 1).flatten(0, 2).unsqueeze(0)
 
 
-class PretrainVisionTransformerEncoder(nn.Module):
+class PretrainVisionTransformerEncoder(nn.Module,
+                                       PyTorchModelHubMixin,
+                                       repo_url="https://github.com/neuroailab/Opt_CWM",
+                                       pipeline_tag="image-feature-extraction",
+                                       license="mit"):
     """Vision Transformer with support for patch or hybrid CNN input stage"""
 
     def __init__(
